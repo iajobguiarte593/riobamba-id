@@ -2,12 +2,13 @@ const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL
 const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_KEY
 
 export async function registrarCiudadano(datos) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/ciudadanos?schema=riobamba_id`, {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/ciudadanos`, {
     method: 'POST',
     headers: {
       'apikey': SUPABASE_KEY,
       'Authorization': `Bearer ${SUPABASE_KEY}`,
       'Content-Type': 'application/json',
+      'Accept-Profile': 'riobamba_id',
       'Prefer': 'return=representation'
     },
     body: JSON.stringify({
