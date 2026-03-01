@@ -19,8 +19,20 @@ export async function registrarCiudadano(datos) {
       canal_entrada: 'pwa_directa'
     })
   })
-
   if (!res.ok) throw new Error(await res.text())
   const data = await res.json()
   return data[0]
+}
+
+export async function buscarCiudadano(whatsapp_hash) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/ciudadanos?whatsapp_hash=eq.${whatsapp_hash}&limit=1`, {
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Accept-Profile': 'riobamba_id'
+    }
+  })
+  if (!res.ok) throw new Error(await res.text())
+  const data = await res.json()
+  return data[0] || null
 }
